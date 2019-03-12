@@ -129,9 +129,12 @@ class PasswordResetForm(django_forms.PasswordResetForm, FormWithReCaptcha):
 class NameForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name']
+        fields = ['first_name', 'last_name', 'email']
         labels = {
             'first_name': pgettext_lazy(
                 'Customer form: Given name field', 'Given name'),
             'last_name': pgettext_lazy(
-                'Customer form: Family name field', 'Family name')}
+                'Customer form: Family name field', 'Family name'),
+            'email': pgettext_lazy(
+                'Customer form: Family name field', 'Email'),
+                }

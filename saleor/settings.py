@@ -7,6 +7,7 @@ import django_cache_url
 from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _, pgettext_lazy
 from django_prices.templatetags.prices_i18n import get_currency_fraction
+from saleor.secrets import STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY
 
 from . import __version__
 
@@ -319,11 +320,11 @@ AUTH_USER_MODEL = 'account.User'
 
 LOGIN_URL = '/account/login/'
 
-DEFAULT_COUNTRY = os.environ.get('DEFAULT_COUNTRY', 'US')
-DEFAULT_CURRENCY = os.environ.get('DEFAULT_CURRENCY', 'USD')
+DEFAULT_COUNTRY = os.environ.get('DEFAULT_COUNTRY', 'CH')
+DEFAULT_CURRENCY = os.environ.get('DEFAULT_CURRENCY', 'CHF')
 DEFAULT_DECIMAL_PLACES = get_currency_fraction(DEFAULT_CURRENCY)
 DEFAULT_MAX_DIGITS = 12
-AVAILABLE_CURRENCIES = [DEFAULT_CURRENCY]
+AVAILABLE_CURRENCIES = [DEFAULT_CURRENCY, "EUR", "BTC"]
 COUNTRIES_OVERRIDE = {
     'EU': pgettext_lazy(
         'Name of political and economical union of european countries',
@@ -334,7 +335,7 @@ OPENEXCHANGERATES_API_KEY = os.environ.get('OPENEXCHANGERATES_API_KEY')
 # VAT configuration
 # Enabling vat requires valid vatlayer access key.
 # If you are subscribed to a paid vatlayer plan, you can enable HTTPS.
-VATLAYER_ACCESS_KEY = os.environ.get('VATLAYER_ACCESS_KEY')
+VATLAYER_ACCESS_KEY = '537cd7196abde3035ae3fb8716a412a6'
 VATLAYER_USE_HTTPS = get_bool_from_env('VATLAYER_USE_HTTPS', False)
 
 ACCOUNT_ACTIVATION_DAYS = 3
@@ -363,8 +364,8 @@ if not CACHES['default']['BACKEND'].endswith('LocMemCache'):
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'}
 
-LOW_STOCK_THRESHOLD = 10
-MAX_CART_LINE_QUANTITY = int(os.environ.get('MAX_CART_LINE_QUANTITY', 50))
+LOW_STOCK_THRESHOLD = 100
+MAX_CART_LINE_QUANTITY = int(os.environ.get('MAX_CART_LINE_QUANTITY', 10000))
 
 PAGINATE_BY = 16
 DASHBOARD_PAGINATE_BY = 30
@@ -443,10 +444,10 @@ WEBPACK_LOADER = {
             r'.+\.map']}}
 
 
-LOGOUT_ON_PASSWORD_CHANGE = False
+LOGOUT_ON_PASSWORD_CHANGE = True
 
 # SEARCH CONFIGURATION
-DB_SEARCH_ENABLED = True
+DB_SEARCH_ENABLED = False
 
 # support deployment-dependant elastic enviroment variable
 ES_URL = (
@@ -563,8 +564,10 @@ BRAINTREE = 'braintree'
 RAZORPAY = 'razorpay'
 STRIPE = 'stripe'
 
+
 CHECKOUT_PAYMENT_GATEWAYS = {
-    DUMMY: pgettext_lazy('Payment method name', 'Dummy gateway')}
+    DUMMY: pgettext_lazy('Payment method name', 'Dummy gateway'),
+    STRIPE: pgettext_lazy('Payment method name', 'Stripe gateway')}
 
 PAYMENT_GATEWAYS = {
     DUMMY: {
@@ -592,10 +595,10 @@ PAYMENT_GATEWAYS = {
     STRIPE: {
         'module': 'saleor.payment.gateways.stripe',
         'connection_params': {
-            'public_key': os.environ.get('STRIPE_PUBLIC_KEY'),
-            'secret_key': os.environ.get('STRIPE_SECRET_KEY'),
-            'store_name': os.environ.get(
-                'STRIPE_STORE_NAME', 'Saleor'),
+            'public_key': STRIPE_PUBLIC_KEY,
+            'secret_key': STRIPE_SECRET_KEY,
+            'store_ name': os.environ.get(
+                'STRIPE_STORE_NAME', 'Shift Devices AG'),
             'store_image': os.environ.get('STRIPE_STORE_IMAGE', None),
             'prefill': get_bool_from_env('STRIPE_PREFILL', True),
             'remember_me': os.environ.get('STRIPE_REMEMBER_ME', True),
