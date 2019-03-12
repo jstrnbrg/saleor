@@ -97,14 +97,15 @@
               {% endif %}
             {% else %}
               <li>
-                <a rel="nofollow" href="{% url "account:signup" %}">
-                  {% trans "Register" context "Main navigation item" %}</a>
+                <a rel="nofollow" href="{% url "account:login" %}">
+                  {% trans "Resellers" context "Main navigation item" %}</a>
               </li>
-              <li>
+
+              <!--<li>
                 <a rel="nofollow" href="{% url "account:login" %}">
                   {% trans "Log in" context "Main navigation item" %}
                 </a>
-              </li>
+              </li>-->
             {% endif %}
           </ul>
         </div>
@@ -119,7 +120,7 @@
               <svg data-src="{% static "images/mobile-menu.svg" %}" width="28px" height="20px"/>
             </div>
             <a href="{% url 'home' %}">
-              <svg data-src="{% static "images/logo-document.svg" %}"/>
+              <svg data-src="{% static "images/shift-cryptosecurity-logo.svg" %}"/>
             </a>
           </div>
           <div class="col-2 col-md-5 navbar__search static">
@@ -195,7 +196,7 @@
       <div class="row">
           {% footer_menu site_menu=site.settings.bottom_menu %}
         <div class="col-md-2 col-6">
-        <ul class="menu">
+        <!--<ul class="menu">
           <li class="nav-item__dropdown menu__item">
             <a>
               <strong>
@@ -250,7 +251,7 @@
                 </a>
               </li>
             {% endif %}
-          </ul>
+          </ul>-->
         </div>
         <div class="offset-md-2 col-md-4 col-12">
           <div class="footer__menus__social-container">
@@ -290,10 +291,10 @@
       <div class="row">
         <div class="col-4">
           <a href="{% url 'home' %}" class="footer__logo float-md-left">
-            <svg data-src="{% static "images/logo-document.svg" %}"/>
+            <svg data-src="{% static "images/shift-cryptosecurity-logo.svg" %}"/>
           </a>
         </div>
-        <div class="col-8 footer__copy-text">COPYRIGHT © 2009–2019 MIRUMEE SOFTWARE</div>
+        <div class="col-8 footer__copy-text">COPYRIGHT © 2015–2019 Shift Cryptosecurity</div>
       </div>
     </div>
   </div>

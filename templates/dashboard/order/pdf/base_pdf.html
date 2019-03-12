@@ -25,16 +25,22 @@
 
   <body>
     <header>
-      <div style="float: left">
-        <img alt="logo" src="{% static "images/logo-document.svg" %}" />
+      <div>
+      <div style="float: left;">
+        <img style="width:10em" alt="Shift Cryptosecurity AG" src="{% static "images/shift-cryptosecurity-logo.svg" %}" />
       </div>
 
       <div style="float: right">
+      <h3>Shift Cryptosecurity AG</h3>
+      <p>Soodmatten Strasse 4<br>CH-8134 Adliswil<br>Switzerland<br><br>
         {{ order.created }}<br />
         {% blocktrans trimmed context "Order PDF header" with order_id=order.id %}
           Order #{{ order_id }}
-        {% endblocktrans %}
+        {% endblocktrans %}</p>
       </div>
+      </div>
+
+
     </header>
 
     {% block content %}{% endblock %}

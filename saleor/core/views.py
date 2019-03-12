@@ -1,6 +1,8 @@
 import json
 
 from django.contrib import messages
+from django.shortcuts import redirect
+
 from django.template.response import TemplateResponse
 from django.utils.translation import pgettext_lazy
 from impersonate.views import impersonate as orig_impersonate
@@ -25,6 +27,12 @@ def home(request):
             'parent': None,
             'products': products,
             'webpage_schema': json.dumps(webpage_schema)})
+
+
+def reseller(request):
+    if not request.user.is_authenticated:
+        return redirect(home)
+    return TemplateResponse(request, 'reseller.html')
 
 
 @staff_member_required
