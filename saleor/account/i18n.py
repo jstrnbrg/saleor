@@ -125,6 +125,10 @@ class AddressForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # countries order was taken as defined in the model,
         # not being sorted accordingly to the selected language
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+
+
         self.fields['country'].choices = sorted(
             COUNTRY_CHOICES, key=lambda choice: choice[1])
         autocomplete_dict = defaultdict(
