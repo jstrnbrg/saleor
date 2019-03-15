@@ -7,7 +7,7 @@ import django_cache_url
 from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _, pgettext_lazy
 from django_prices.templatetags.prices_i18n import get_currency_fraction
-from saleor.secrets import STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY
+from saleor.secrets import STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY, EMAIL_URL
 
 from . import __version__
 
@@ -100,7 +100,7 @@ USE_TZ = True
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
-EMAIL_URL = os.environ.get('EMAIL_URL')
+EMAIL_URL = EMAIL_URL
 SENDGRID_USERNAME = os.environ.get('SENDGRID_USERNAME')
 SENDGRID_PASSWORD = os.environ.get('SENDGRID_PASSWORD')
 if not EMAIL_URL and SENDGRID_USERNAME and SENDGRID_PASSWORD:
