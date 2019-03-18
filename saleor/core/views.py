@@ -30,7 +30,9 @@ def home(request):
 
 
 def reseller(request):
-    if not request.user.is_authenticated:
+    resellers = list(User.objects.all().values_list('email', flat=True))
+    #print(customers)
+    if not request.user.email in resellers:
         return redirect(home)
     return TemplateResponse(request, 'reseller.html')
 

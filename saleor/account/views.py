@@ -32,7 +32,7 @@ def logout(request):
     return redirect(settings.LOGIN_REDIRECT_URL)
 
 
-def signup(request):
+"""def signup(request):
     form = SignupForm(request.POST or None)
     if form.is_valid():
         form.save()
@@ -46,7 +46,7 @@ def signup(request):
         redirect_url = request.POST.get('next', settings.LOGIN_REDIRECT_URL)
         return redirect(redirect_url)
     ctx = {'form': form}
-    return TemplateResponse(request, 'account/signup.html', ctx)
+    return TemplateResponse(request, 'account/signup.html', ctx)"""
 
 
 def password_reset(request):
