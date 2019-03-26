@@ -1,13 +1,15 @@
 pipeline {
+    agent any
+
     stages {
         stage('Pull') {
             steps {
-                sh 'git checkout shift'
-                sh 'docker-compose pull' 
+                sh 'docker-compose pull'
             }
         }
         stage('Build') {
             steps {
+                sh 'cp ../../saleor_secrets/secrets.py ./saleor'
                 sh 'docker-compose build'
             }
         }
@@ -35,3 +37,4 @@ pipeline {
         }
     }
 }
+
