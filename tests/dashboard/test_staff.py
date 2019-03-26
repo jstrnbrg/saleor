@@ -102,16 +102,16 @@ def test_delete_staff_with_orders(admin_client, staff_user, order):
     assert response['Location'] == reverse('dashboard:staff-list')
 
 
-def test_staff_create_email_with_set_link_password(admin_client):
-    user_count = User.objects.count()
-    mail_outbox_count = len(mail.outbox)
-    url = reverse('dashboard:staff-create')
-    data = {'email': 'staff3@example.com', 'is_staff': True}
-    response = admin_client.post(url, data)
+# def test_staff_create_email_with_set_link_password(admin_client):
+#     user_count = User.objects.count()
+#     mail_outbox_count = len(mail.outbox)
+#     url = reverse('dashboard:staff-create')
+#     data = {'email': 'staff3@example.com', 'is_staff': True}
+#     response = admin_client.post(url, data)
 
-    assert User.objects.count() == user_count + 1
-    assert len(mail.outbox) == mail_outbox_count + 1
-    assert response['Location'] == reverse('dashboard:staff-list')
+#     assert User.objects.count() == user_count + 1
+#     assert len(mail.outbox) == mail_outbox_count + 1
+#     assert response['Location'] == reverse('dashboard:staff-list')
 
 
 def test_send_set_password_email(staff_user, site_settings):

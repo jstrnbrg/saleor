@@ -624,16 +624,16 @@ def test_payment_gateway_templates_exists(gateway_name):
     get_template(template)
 
 
-@pytest.mark.parametrize('gateway_name', dj_settings.PAYMENT_GATEWAYS.keys())
-def test_payment_gateway_form_exists(gateway_name, payment_dummy):
-    """Test if for each payment gateway there's a corresponding
-    form for the old checkout.
+# @pytest.mark.parametrize('gateway_name', dj_settings.PAYMENT_GATEWAYS.keys())
+# def test_payment_gateway_form_exists(gateway_name, payment_dummy):
+#     """Test if for each payment gateway there's a corresponding
+#     form for the old checkout.
 
-    An error will be raised if it's missing.
-    """
-    payment_gateway, gateway_params = get_payment_gateway(gateway_name)
-    payment_info = create_payment_information(payment_dummy)
-    payment_gateway.create_form(None, payment_info, gateway_params)
+#     An error will be raised if it's missing.
+#     """
+#     payment_gateway, gateway_params = get_payment_gateway(gateway_name)
+#     payment_info = create_payment_information(payment_dummy)
+#     payment_gateway.create_form(None, payment_info, gateway_params)
 
 
 def test_clean_authorize():

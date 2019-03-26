@@ -380,8 +380,8 @@ bootstrap4 = {
 
 TEST_RUNNER = 'tests.runner.PytestTestRunner'
 
-ALLOWED_HOSTS = get_list(
-    os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1'))
+ALLOWED_HOSTS = ['176.9.28.202', get_list(
+    os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1'))]
 ALLOWED_GRAPHQL_ORIGINS = os.environ.get('ALLOWED_GRAPHQL_ORIGINS', '*')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

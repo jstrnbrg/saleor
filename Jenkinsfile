@@ -1,21 +1,31 @@
 pipeline {
+    agent any
+
     stages {
         stage('Pull') {
             steps {
-                sh 'git checkout shift'
-                sh 'docker-compose pull' 
+                sh 'docker-compose pull'
             }
         }
         stage('Build') {
             steps {
+                sh 'cp ../../saleor_secrets/secrets.py ./saleor'
                 sh 'docker-compose build'
             }
         }
-        stage('Prepare') {
+        stage('Makemigrations') {
             steps {
                 sh 'docker-compose run --rm web python3 manage.py makemigrations'
+            }
+        }
+        stage('Migrate') {
+            steps {
                 sh 'docker-compose run --rm web python3 manage.py migrate'
-                sh 'docker-compose run --rm web python3 manage.py collectstatic'
+            }
+        }
+        stage('Collectstatic') {
+            steps {
+                sh 'docker-compose run --rm web python3 manage.py collectstatic --no-input'
             }
         }
         stage('Test') {
@@ -35,3 +45,4 @@ pipeline {
         }
     }
 }
+
