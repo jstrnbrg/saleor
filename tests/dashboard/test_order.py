@@ -362,10 +362,10 @@ def test_dashboard_change_quantity_form(request_cart_with_item, order):
     order_line = order.lines.get()
     quantity_before = order_line.variant.quantity_allocated
     # Check max quantity validation
-    form = ChangeQuantityForm({'quantity': 9999}, instance=order_line)
+    form = ChangeQuantityForm({'quantity': 99999}, instance=order_line)
     assert not form.is_valid()
     assert form.errors['quantity'] == [
-        'Ensure this value is less than or equal to 50.']
+        'Ensure this value is less than or equal to 10000.']
 
     # Check minimum quantity validation
     form = ChangeQuantityForm({'quantity': 0}, instance=order_line)

@@ -357,7 +357,7 @@ def test_view_account_delete_confirm(customer_user, authorized_client):
 
 def test_form_add_names_to_user(customer_user):
     name_form = NameForm(
-        {'first_name': 'Jan', 'last_name': 'Nowak'},
+        {'first_name': 'Jan', 'last_name': 'Nowak', 'email': 'test@test.com'},
         instance=customer_user)
     name_form.is_valid()
     name_form.save()
@@ -369,8 +369,9 @@ def test_form_add_names_to_user(customer_user):
 def test_view_add_names_to_user(customer_user, authorized_client):
     url = reverse('account:details')
     response = authorized_client.post(
-        url, data={'first_name': 'Jan', 'last_name': 'Nowak'})
+        url, data={'first_name': 'Jan', 'last_name': 'Nowak', 'email': 'new@test.com'})
     assert response.status_code == 200
     updated_user = User.objects.get(pk=customer_user.pk)
     assert updated_user.first_name == 'Jan'
     assert updated_user.last_name == 'Nowak'
+    assert updated_user.email == 'new@test.com'
