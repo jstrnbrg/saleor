@@ -12,6 +12,8 @@ from ..dashboard.views import staff_member_required
 from ..product.utils import products_for_homepage
 from ..product.utils.availability import products_with_availability
 from ..seo.schema.webpage import get_webpage_schema
+from django.contrib.auth.decorators import login_required
+
 
 
 def home(request):
@@ -28,12 +30,8 @@ def home(request):
             'products': products,
             'webpage_schema': json.dumps(webpage_schema)})
 
-
+@login_required
 def reseller(request):
-    resellers = list(User.objects.all().values_list('email', flat=True))
-    #print(customers)
-    if not request.user.email in resellers:
-        return redirect(home)
     return TemplateResponse(request, 'reseller.html')
 
 

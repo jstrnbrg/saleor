@@ -32,23 +32,6 @@ def logout(request):
     return redirect(settings.LOGIN_REDIRECT_URL)
 
 
-"""def signup(request):
-    form = SignupForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        password = form.cleaned_data.get('password')
-        email = form.cleaned_data.get('email')
-        user = auth.authenticate(
-            request=request, email=email, password=password)
-        if user:
-            auth.login(request, user)
-        messages.success(request, _('User has been created'))
-        redirect_url = request.POST.get('next', settings.LOGIN_REDIRECT_URL)
-        return redirect(redirect_url)
-    ctx = {'form': form}
-    return TemplateResponse(request, 'account/signup.html', ctx)"""
-
-
 def password_reset(request):
     kwargs = {
         'template_name': 'account/password_reset.html',
