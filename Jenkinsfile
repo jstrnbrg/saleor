@@ -13,11 +13,19 @@ pipeline {
                 sh 'docker-compose build'
             }
         }
-        stage('Prepare') {
+        stage('Makemigrations') {
             steps {
                 sh 'docker-compose run --rm web python3 manage.py makemigrations'
+            }
+        }
+        stage('Migrate') {
+            steps {
                 sh 'docker-compose run --rm web python3 manage.py migrate'
-                sh 'docker-compose run --rm web python3 manage.py collectstatic'
+            }
+        }
+        stage('Collectstatic') {
+            steps {
+                sh 'docker-compose run --rm web python3 manage.py collectstatic --no-input'
             }
         }
         stage('Test') {
